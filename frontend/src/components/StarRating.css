@@ -1,0 +1,12 @@
+.star-rating { display: flex; gap: 3px; }
+
+.star {
+  font-size: 20px;
+  color: #30363d;
+  cursor: pointer;
+  transition: color 0.1s;
+  line-height: 1;
+}
+
+.star.filled { color: #00d4aa; }
+.star.readonly { cursor: default; font-size: 14px; }
