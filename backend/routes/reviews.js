@@ -3,7 +3,6 @@ const router = express.Router();
 const Review = require('../models/Review');
 const authMiddleware = require('../middleware/authMiddleware');
 
-// GET /api/reviews/my — recenziile userului logat
 router.get('/my', authMiddleware, async (req, res) => {
   try {
     const reviews = await Review.find({ user: req.userId }).sort({ createdAt: -1 });
@@ -13,7 +12,6 @@ router.get('/my', authMiddleware, async (req, res) => {
   }
 });
 
-// GET /api/reviews/:tmdbMovieId
 router.get('/:tmdbMovieId', async (req, res) => {
   try {
     const reviews = await Review.find({ tmdbMovieId: req.params.tmdbMovieId })
@@ -25,7 +23,6 @@ router.get('/:tmdbMovieId', async (req, res) => {
   }
 });
 
-// POST /api/reviews
 router.post('/', authMiddleware, async (req, res) => {
   try {
     const { tmdbMovieId, movieTitle, moviePoster, rating, text, mediaType } = req.body;
@@ -47,7 +44,6 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
-// DELETE /api/reviews/:id
 router.delete('/:id', authMiddleware, async (req, res) => {
   try {
     const review = await Review.findById(req.params.id);
