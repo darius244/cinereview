@@ -5,7 +5,6 @@ const authHeaders = (token) => ({
   Authorization: `Bearer ${token}`
 });
 
-// ---- AUTH ----
 export const registerUser = async (username, email, password) => {
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: 'POST',
@@ -24,7 +23,6 @@ export const loginUser = async (email, password) => {
   return res.json();
 };
 
-// ---- MOVIES ----
 export const getPopularMovies = async (page = 1) => {
   const res = await fetch(`${BASE_URL}/movies/popular?page=${page}`);
   return res.json();
@@ -36,7 +34,6 @@ export const searchMovies = async (query) => {
 };
 
 export const searchAll = async (query) => {
-  // Caută simultan filme și seriale
   const [moviesRes, tvRes] = await Promise.all([
     fetch(`${BASE_URL}/movies/search?q=${encodeURIComponent(query)}`).then(r => r.json()),
     fetch(`${BASE_URL}/tv/search?q=${encodeURIComponent(query)}`).then(r => r.json()),
@@ -50,7 +47,6 @@ export const searchAll = async (query) => {
     mediaType: 'serial'
   }));
 
-  // Combinăm și sortăm după popularitate
   return {
     results: [...movies, ...tv].sort((a, b) => b.popularity - a.popularity)
   };
@@ -61,7 +57,6 @@ export const getMovieDetails = async (id) => {
   return res.json();
 };
 
-// ---- REVIEWS ----
 export const getReviews = async (tmdbMovieId) => {
   const res = await fetch(`${BASE_URL}/reviews/${tmdbMovieId}`);
   return res.json();
