@@ -5,7 +5,6 @@ const axios = require('axios');
 const TMDB_BASE = 'https://api.themoviedb.org/3';
 const TMDB_KEY = process.env.TMDB_API_KEY;
 
-// GET /api/tv/discover
 router.get('/discover', async (req, res) => {
   try {
     const { data } = await axios.get(`${TMDB_BASE}/discover/tv`, {
@@ -17,7 +16,6 @@ router.get('/discover', async (req, res) => {
   }
 });
 
-// GET /api/tv/search
 router.get('/search', async (req, res) => {
   try {
     const { data } = await axios.get(`${TMDB_BASE}/search/tv`, {
@@ -29,7 +27,6 @@ router.get('/search', async (req, res) => {
   }
 });
 
-// GET /api/tv/:id
 router.get('/:id', async (req, res) => {
   try {
     const { data } = await axios.get(`${TMDB_BASE}/tv/${req.params.id}`, {
